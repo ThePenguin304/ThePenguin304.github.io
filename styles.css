@@ -1,11 +1,11 @@
 /* General */
 body {
-  font-family: Arial, sans-serif;
+  font-family: "Courier New", Courier, monospace;
   margin: 0;
   padding: 0;
   line-height: 1.6;
-  background-color: #f9f9f9;
-  color: #333;
+  background-color: #000; /* Fondo negro */
+  color: #0f0; /* Texto verde tipo hacking */
 }
 .container {
   width: 80%;
@@ -13,22 +13,26 @@ body {
   overflow: hidden;
 }
 header {
-  background: #333;
-  color: #fff;
+  background: #111; /* Fondo ligeramente gris oscuro */
+  color: #0f0; /* Letras verdes */
   padding: 1rem 0;
 }
 header h1 {
   margin: 0;
   text-align: center;
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 header nav {
   text-align: center;
   margin-top: 0.5rem;
 }
 header nav a {
-  color: #fff;
+  color: #0f0; /* Verde hacker */
   margin: 0 1rem;
   text-decoration: none;
+  font-weight: bold;
 }
 header nav a:hover {
   text-decoration: underline;
@@ -37,19 +41,27 @@ header nav a:hover {
   margin: 2rem 0;
 }
 .posts article {
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #0f0; /* Línea verde */
   padding: 1rem 0;
 }
 .posts article h2 a {
   text-decoration: none;
-  color: #007bff;
+  color: #0f0;
 }
 .posts article h2 a:hover {
-  text-decoration: underline;
+  color: #33ff33; /* Verde más brillante al pasar el cursor */
 }
 footer {
   text-align: center;
   padding: 1rem 0;
-  background: #333;
-  color: #fff;
+  background: #111;
+  color: #0f0;
+}
+
+/* Código extra para un efecto de "pantalla de terminal" */
+body {
+  text-shadow: 0 0 5px #0f0, 0 0 10px #0f0;
+}
+h1, h2, p, a {
+  text-shadow: 0 0 5px #0f0, 0 0 10px #0f0;
 }
