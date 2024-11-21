@@ -7,63 +7,65 @@ body {
   background-color: #000; /* Fondo negro */
   color: #0f0; /* Texto verde tipo hacking */
 }
+
 .container {
   width: 80%;
   margin: auto;
   overflow: hidden;
 }
+
 header {
-  background: #111; /* Fondo ligeramente gris oscuro */
-  color: #0f0; /* Letras verdes */
+  background: #111; /* Fondo oscuro para la cabecera */
+  color: #0f0; /* Texto verde hacker */
   padding: 1rem 0;
+  text-align: center;
 }
+
 header h1 {
   margin: 0;
-  text-align: center;
   font-size: 2.5rem;
   text-transform: uppercase;
   letter-spacing: 2px;
 }
+
 header nav {
-  text-align: center;
-  margin-top: 0.5rem;
+  margin-top: 1rem;
 }
+
 header nav a {
   color: #0f0; /* Verde hacker */
   margin: 0 1rem;
   text-decoration: none;
   font-weight: bold;
 }
+
 header nav a:hover {
   text-decoration: underline;
 }
+
 .posts {
   margin: 2rem 0;
 }
+
 .posts article {
-  border-bottom: 1px solid #0f0; /* Línea verde */
+  border-bottom: 1px solid #0f0; /* Línea verde para separar posts */
   padding: 1rem 0;
 }
+
 .posts article h2 a {
   text-decoration: none;
-  color: #0f0;
+  color: #0f0; /* Verde hacker para los títulos */
 }
+
 .posts article h2 a:hover {
-  color: #33ff33; /* Verde más brillante al pasar el cursor */
+  color: #33ff33; /* Verde brillante al pasar el ratón */
 }
+
 footer {
   text-align: center;
   padding: 1rem 0;
-  background: #111;
+  background: #111; /* Fondo oscuro para el pie */
   color: #0f0;
-}
-
-/* Código extra para un efecto de "pantalla de terminal" */
-body {
-  text-shadow: 0 0 5px #0f0, 0 0 10px #0f0;
-}
-h1, h2, p, a {
-  text-shadow: 0 0 5px #0f0, 0 0 10px #0f0;
 }
 
 /* Animación de texto tipo terminal */
