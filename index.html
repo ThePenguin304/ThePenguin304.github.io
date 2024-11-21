@@ -3,124 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Blog de Ciberseguridad - Apuntes, Write-ups y recursos">
+  <meta name="description" content="Blog de Ciberseguridad">
   <title>Blog de Ciberseguridad</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <header>
-    <nav>
-      <div class="container">
-        <h1>Blog de Ciberseguridad</h1>
-        <ul>
-          <li><a href="#inicio">Inicio</a></li>
-          <li><a href="#apuntes">Apuntes</a></li>
-          <li><a href="#writeups">Write-ups</a></li>
-          <li><a href="#contacto">Contacto</a></li>
-        </ul>
-      </div>
-    </nav>
+    <div class="container">
+      <h1>Blog de Ciberseguridad</h1>
+      <p>Artículos, Write-ups y recursos sobre hacking</p>
+      <nav>
+        <a href="index.html">Inicio</a>
+        <a href="#about">Sobre mí</a>
+        <a href="#contact">Contacto</a>
+      </nav>
+    </div>
   </header>
 
   <main>
-    <section id="inicio" class="hero">
-      <div class="container">
-        <h2>Bienvenido a mi Blog de Ciberseguridad</h2>
-        <p>Comparte mis apuntes de certificaciones, write-ups y recursos para aprender hacking ético.</p>
-      </div>
-    </section>
-
-    <section id="apuntes" class="content-section">
-      <div class="container">
-        <h2>Apuntes</h2>
-        <p>Aquí encontrarás mis apuntes organizados por módulos:</p>
-        <ul>
-          <li><a href="modulo1.html">Módulo 1: Introducción</a></li>
-          <li><a href="modulo2.html">Módulo 2: Footprinting y Reconnaissance</a></li>
-          <li><a href="modulo3.html">Módulo 3: Scanning Networks</a></li>
-        </ul>
-      </div>
-    </section>
-
-    <section id="writeups" class="content-section">
-      <div class="container">
-        <h2>Write-ups</h2>
-        <p>Explora mis write-ups de retos y máquinas vulnerables:</p>
-        <ul>
-          <li><a href="writeup1.html">Máquina: HackTheBox - Bashed</a></li>
-          <li><a href="writeup2.html">Máquina: TryHackMe - Blue</a></li>
-        </ul>
-      </div>
-    </section>
-
-    <section id="contacto" class="content-section">
-      <div class="container">
-        <h2>Contacto</h2>
-        <p>¿Quieres compartir ideas o colaborar? Escríbeme:</p>
-        <ul>
-          <li>Email: <a href="mailto:tucorreo@dominio.com">tucorreo@dominio.com</a></li>
-          <li>GitHub: <a href="https://github.com/tuusuario" target="_blank">tuusuario</a></li>
-        </ul>
-      </div>
+    <section class="posts">
+      <article>
+        <h2><a href="posts/post1.html">Post 1: Introducción a Footprinting</a></h2>
+        <p>Aprende los fundamentos de Footprinting y Reconnaissance. [Leer más...]</p>
+      </article>
+      <article>
+        <h2><a href="posts/post2.html">Post 2: Scanning Networks</a></h2>
+        <p>Guía completa sobre escaneo de redes con herramientas prácticas. [Leer más...]</p>
+      </article>
     </section>
   </main>
 
   <footer>
-    <div class="container">
-      <p>&copy; 2024 Blog de Ciberseguridad - Todos los derechos reservados</p>
-    </div>
+    <p>&copy; 2024 Blog de Ciberseguridad. Todos los derechos reservados.</p>
   </footer>
-
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
-      margin: 0;
-      padding: 0;
-      background-color: #f4f4f9;
-    }
-    header {
-      background: #333;
-      color: #fff;
-      padding: 1rem 0;
-    }
-    header h1 {
-      margin: 0;
-      text-align: center;
-    }
-    nav ul {
-      display: flex;
-      justify-content: center;
-      list-style: none;
-      padding: 0;
-    }
-    nav ul li {
-      margin: 0 1rem;
-    }
-    nav ul li a {
-      color: #fff;
-      text-decoration: none;
-    }
-    .hero {
-      background: #007bff;
-      color: #fff;
-      padding: 2rem 0;
-      text-align: center;
-    }
-    .content-section {
-      padding: 2rem;
-      background: #fff;
-      margin: 1rem 0;
-    }
-    .content-section h2 {
-      color: #333;
-    }
-    footer {
-      text-align: center;
-      padding: 1rem 0;
-      background: #333;
-      color: #fff;
-    }
-  </style>
 </body>
 </html>
