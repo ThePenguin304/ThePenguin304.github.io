@@ -65,3 +65,23 @@ body {
 h1, h2, p, a {
   text-shadow: 0 0 5px #0f0, 0 0 10px #0f0;
 }
+
+/* Animación de texto tipo terminal */
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink {
+  50% { border-color: transparent; }
+}
+
+.typing-effect {
+  font-family: "Courier New", Courier, monospace;
+  color: #0f0;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 2px solid #0f0;
+  width: 0;
+  animation: typing 4s steps(30, end), blink 0.5s step-end infinite;
+}
