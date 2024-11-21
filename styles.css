@@ -6,98 +6,86 @@ body {
   line-height: 1.6;
   background-color: #000; /* Fondo negro */
   color: #0f0; /* Texto verde tipo hacking */
+  display: flex;
 }
 
-.container {
-  width: 80%;
-  margin: auto;
-  overflow: hidden;
+/* Barra lateral */
+.sidebar {
+  width: 250px;
+  background-color: #111;
+  padding: 2rem;
+  position: fixed;
+  height: 100%;
+  top: 0;
+  left: 0;
+  color: #0f0;
 }
 
+.sidebar h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.sidebar nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar nav ul li {
+  margin: 1rem 0;
+}
+
+.sidebar nav ul li a {
+  color: #0f0; /* Verde hacker */
+  text-decoration: none;
+}
+
+.sidebar nav ul li a:hover {
+  color: #33ff33; /* Verde brillante al pasar el ratón */
+}
+
+/* Contenido principal */
+.content {
+  margin-left: 250px; /* Para que el contenido no se solape con la barra lateral */
+  padding: 2rem;
+  width: calc(100% - 250px);
+}
+
+/* Estilo del header */
 header {
-  background: #111; /* Fondo oscuro para la cabecera */
-  color: #0f0; /* Texto verde hacker */
-  padding: 1rem 0;
   text-align: center;
 }
 
 header h1 {
-  margin: 0;
   font-size: 2.5rem;
   text-transform: uppercase;
   letter-spacing: 2px;
 }
 
-header nav {
+header p {
   margin-top: 1rem;
+  font-size: 1.2rem;
 }
 
-header nav a {
-  color: #0f0; /* Verde hacker */
-  margin: 0 1rem;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-header nav a:hover {
-  text-decoration: underline;
-}
-
-.posts {
-  margin: 2rem 0;
-}
-
+/* Estilo para los posts */
 .posts article {
-  border-bottom: 1px solid #0f0; /* Línea verde para separar posts */
+  border-bottom: 1px solid #0f0;
   padding: 1rem 0;
 }
 
 .posts article h2 a {
   text-decoration: none;
-  color: #0f0; /* Verde hacker para los títulos */
+  color: #0f0;
 }
 
 .posts article h2 a:hover {
-  color: #33ff33; /* Verde brillante al pasar el ratón */
+  color: #33ff33;
 }
 
+/* Pie de página */
 footer {
   text-align: center;
   padding: 1rem 0;
-  background: #111; /* Fondo oscuro para el pie */
+  background: #111;
   color: #0f0;
-}
-
-/* Animación de texto tipo terminal */
-@keyframes typing {
-  from { width: 0; }
-  to { width: 100%; }
-}
-
-@keyframes blink {
-  50% { border-color: transparent; }
-}
-
-.typing-effect {
-  font-family: "Courier New", Courier, monospace;
-  color: #0f0;
-  white-space: nowrap;
-  overflow: hidden;
-  border-right: 2px solid #0f0;
-  width: 0;
-  animation: typing 4s steps(30, end), blink 0.5s step-end infinite;
-}
-
-/* Estilo para los enlaces */
-a {
-  color: #0f0; /* Verde hacker para enlaces */
-  text-decoration: none; /* Sin subrayado */
-}
-
-a:hover {
-  color: #33ff33; /* Verde más brillante al pasar el ratón */
-}
-
-a:visited {
-  color: #009900; /* Verde oscuro para enlaces visitados */
 }
