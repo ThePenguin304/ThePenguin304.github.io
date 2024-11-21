@@ -21,11 +21,29 @@ body {
   color: #0f0;
 }
 
-.sidebar h2 {
-  font-size: 1.5rem;
+.profile {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.profile-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
   margin-bottom: 1rem;
 }
 
+.profile h2 {
+  margin: 0.5rem 0;
+  font-size: 1.5rem;
+}
+
+.profile p {
+  font-size: 1rem;
+  color: #33ff33; /* Verde brillante para el texto descriptivo */
+}
+
+/* Estilos del menú de navegación */
 .sidebar nav ul {
   list-style-type: none;
   padding: 0;
@@ -36,12 +54,16 @@ body {
 }
 
 .sidebar nav ul li a {
-  color: #0f0; /* Verde hacker */
+  color: #0f0;
   text-decoration: none;
+  display: block;
+  padding: 10px;
+  border-radius: 4px;
 }
 
 .sidebar nav ul li a:hover {
-  color: #33ff33; /* Verde brillante al pasar el ratón */
+  background-color: #33ff33;
+  color: #000;
 }
 
 /* Contenido principal */
