@@ -87,3 +87,17 @@ footer {
   width: 0;
   animation: typing 4s steps(30, end), blink 0.5s step-end infinite;
 }
+
+/* Estilo para los enlaces */
+a {
+  color: #0f0; /* Verde hacker para enlaces */
+  text-decoration: none; /* Sin subrayado */
+}
+
+a:hover {
+  color: #33ff33; /* Verde más brillante al pasar el ratón */
+}
+
+a:visited {
+  color: #009900; /* Verde oscuro para enlaces visitados */
+}
