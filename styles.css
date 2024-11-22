@@ -70,7 +70,7 @@ body {
 
 /* Contenido principal */
 .content {
-  margin-left: 500px; /* Deja espacio para la barra lateral */
+  margin-left: 250px; /* Deja espacio para la barra lateral */
   padding: 2rem;
   width: calc(100% - 250px); /* Ajusta el ancho para ocupar el resto del espacio */
   box-sizing: border-box;
