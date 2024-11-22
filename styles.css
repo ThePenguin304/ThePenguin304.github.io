@@ -108,13 +108,3 @@ header p {
   color: #33ff33;
 }
 
-/* Pie de página */
-footer {
-  text-align: center;
-  padding: 1rem;
-  background-color: #000; /* Fondo negro */
-  color: #fff; /* Texto blanco */
-  font-size: 0.9rem;
-  margin-top: auto; /* Empuja el pie de página al final */
-}
-
