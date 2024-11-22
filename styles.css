@@ -72,7 +72,37 @@ body {
   color: #000;
 }
 
+/* Barra lateral derecha */
+.sidebar-right {
+  width: 250px;
+  background-color: #111; /* Mismo color que la barra izquierda */
+  padding: 2rem;
+  position: fixed;
+  top: 0;
+  right: 0; /* Posicionada a la derecha */
+  height: 100%; /* Ocupar toda la altura de la ventana */
+  color: #0f0; /* Texto verde */
+  overflow-y: auto; /* Scroll si el contenido es muy largo */
+  z-index: 10; /* Asegura que esté por encima del contenido */
+  display: flex;
+  flex-direction: column;
+}
 
+/* Ajuste del margen superior para alinear el contenido */
+.sidebar-right > section {
+  margin-top: 3.5rem; /* Ajustar este valor según la altura del menú de la izquierda */
+}
+
+.sidebar-right h3 {
+  border-bottom: 2px solid #33ff33;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.sidebar-right ul {
+  list-style-type: none;
+  padding: 0;
+}
 
 .sidebar-right ul li {
   margin: 1rem 0;
@@ -115,15 +145,6 @@ body {
   margin-right: 250px; /* Espacio para la barra derecha */
   padding: 2rem;
   box-sizing: border-box;
-}
-
-/* Contenedor principal */
-.content {
-  margin-left: 350px; /* Espacio para la barra lateral */
-  padding: 2rem;
-  flex: 1; /* Ocupa todo el espacio restante */
-  display: flex;
-  flex-direction: column; /* Asegura que el contenido y el pie se organicen verticalmente */
 }
 
 /* Cabecera */
