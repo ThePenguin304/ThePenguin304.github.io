@@ -1,53 +1,113 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blog de Ciberseguridad</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <!-- Barra lateral -->
-  <aside class="sidebar">
-    <div class="profile">
-      <img src="https://avatars.githubusercontent.com/u/12345678?v=4" alt="Mi Foto" class="profile-img">
-      <h2>Josep Celma</h2>
-      <p>Ciberseguridad | Hacking | Pentesting</p>
-    </div>
-    <nav>
-      <ul>
-        <li><a href="index.html">Inicio</a></li>
-        <li><a href="#about">Sobre mí</a></li>
-        <li><a href="#contact">Contacto</a></li>
-        <li><a href="https://github.com/tu-github" target="_blank">GitHub</a></li>
-        <li><a href="https://twitter.com/tu-twitter" target="_blank">Twitter</a></li>
-        <li><a href="https://linkedin.com/in/tu-linkedin" target="_blank">LinkedIn</a></li>
-      </ul>
-    </nav>
-  </aside>
+/* General */
+body {
+  font-family: "Courier New", Courier, monospace;
+  margin: 0;
+  padding: 0;
+  background-color: #000; /* Fondo negro */
+  color: #0f0; /* Texto verde tipo hacking */
+  display: flex;
+  min-height: 100vh;
+}
 
-  <!-- Contenido principal -->
-  <main class="content">
-    <header>
-      <h1 class="typing-effect">Bienvenido al Blog de H4ck1ng</h1>
-      <p>Apuntes, Write-ups y recursos de ciberseguridad</p>
-    </header>
+/* Barra lateral */
+.sidebar {
+  width: 250px;
+  background-color: #111;
+  padding: 2rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  color: #0f0;
+  overflow-y: auto; /* Permite scroll si el contenido es muy largo */
+}
 
-    <section class="posts">
-      <article>
-        <h2><a href="posts/post1.html">Post 1: Introducción a Footprinting</a></h2>
-        <p>Aprende los fundamentos de Footprinting y Reconnaissance. [Leer más...]</p>
-      </article>
-      <article>
-        <h2><a href="posts/post2.html">Post 2: Scanning Networks</a></h2>
-        <p>Guía completa sobre escaneo de redes con herramientas prácticas. [Leer más...]</p>
-      </article>
-    </section>
-  </main>
+.profile {
+  text-align: center;
+  margin-bottom: 2rem;
+}
 
-  <!-- Pie de página -->
-  <footer>
-    <p>&copy; 2024 H4ck1ng Bl0g. Todos los derechos reservados.</p>
-  </footer>
-</body>
-</html>
+.profile-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+}
+
+.profile h2 {
+  margin: 0.5rem 0;
+  font-size: 1.5rem;
+}
+
+.profile p {
+  font-size: 1rem;
+  color: #33ff33;
+}
+
+.sidebar nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar nav ul li {
+  margin: 1rem 0;
+}
+
+.sidebar nav ul li a {
+  color: #0f0;
+  text-decoration: none;
+  display: block;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.sidebar nav ul li a:hover {
+  background-color: #33ff33;
+  color: #000;
+}
+
+/* Contenido principal */
+.content {
+  margin-left: 250px; /* Para dejar espacio a la barra lateral */
+  padding: 2rem;
+  width: calc(100% - 250px); /* Asegura que el contenido ocupe el espacio restante */
+}
+
+header {
+  text-align: center;
+}
+
+header h1 {
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+header p {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+}
+
+.posts article {
+  border-bottom: 1px solid #0f0;
+  padding: 1rem 0;
+}
+
+.posts article h2 a {
+  text-decoration: none;
+  color: #0f0;
+}
+
+.posts article h2 a:hover {
+  color: #33ff33;
+}
+
+/* Pie de página */
+footer {
+  text-align: center;
+  padding: 1rem;
+  background: #111;
+  color: #0f0;
+  margin-left: 250px; /* Alinea el pie de página con el contenido principal */
+}
+
