@@ -3,73 +3,41 @@ body {
   font-family: "Courier New", Courier, monospace;
   margin: 0;
   padding: 0;
-  display: flex;
   background-color: #000; /* Fondo negro */
   color: #0f0; /* Texto verde tipo hacking */
-  min-height: 100vh; /* Asegura que el cuerpo ocupe toda la altura de la ventana */
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column; /* Para el pie de página */
 }
 
-/* Barra lateral */
+/* Barra lateral izquierda */
 .sidebar {
   width: 250px;
-  background-color: #111; /* Fondo oscuro */
-  color: #0f0; /* Texto verde */
-  padding: 2rem 1rem;
+  background-color: #111;
+  padding: 2rem;
   position: fixed; /* Fija la barra lateral */
   top: 0;
   left: 0;
-  height: 100%; /* Ocupa toda la altura */
+  height: 100%; /* Ocupar toda la altura de la ventana */
+  color: #0f0;
   overflow-y: auto; /* Scroll si el contenido es muy largo */
+  z-index: 10; /* Asegura que esté por encima del contenido */
 }
 
-.profile {
+.sidebar .profile {
   text-align: center;
   margin-bottom: 2rem;
 }
 
-.profile-img {
-  width: 100px;
-  height: 100px;
+.sidebar .profile-img {
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   margin-bottom: 1rem;
 }
 
-.profile h2 {
-  margin: 0.5rem 0;
-  font-size: 1.5rem;
-}
-
-.profile p {
-  font-size: 0.9rem;
-  color: #33ff33;
-}
-
-.sidebar nav ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-.sidebar nav ul li {
-  margin: 1rem 0;
-}
-
-.sidebar nav ul li a {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem; /* Espacio entre el ícono y el texto */
-  color: #0f0;
-  text-decoration: none;
-  padding: 0.5rem;
-  border-radius: 4px;
-}
-
-.sidebar nav ul li a i {
-  font-size: 1.5rem; /* Tamaño del ícono */
-}
-
-.sidebar nav ul li a:hover {
-  background-color: #33ff33;
-  color: #000;
+.sidebar h2, .sidebar p {
+  margin: 0;
 }
 
 /* Barra lateral derecha */
@@ -79,18 +47,15 @@ body {
   padding: 2rem;
   position: fixed;
   top: 0;
-  right: 0; /* Posicionada a la derecha */
-  height: 100%; /* Ocupar toda la altura de la ventana */
-  color: #0f0; /* Texto verde */
-  overflow-y: auto; /* Scroll si el contenido es muy largo */
-  z-index: 10; /* Asegura que esté por encima del contenido */
-  display: flex;
-  flex-direction: column;
+  right: 0; /* Fija la barra a la derecha */
+  height: 100%;
+  color: #0f0;
+  overflow-y: auto;
+  z-index: 10;
 }
 
-/* Ajuste del margen superior para alinear el contenido */
 .sidebar-right > section {
-  margin-top: 3.5rem; /* Ajustar este valor según la altura del menú de la izquierda */
+  margin-top: 3.5rem; /* Ajusta según la altura de la cabecera */
 }
 
 .sidebar-right h3 {
@@ -111,32 +76,11 @@ body {
 .sidebar-right ul li a {
   color: #0f0;
   text-decoration: none;
-  display: block;
-  padding: 5px;
-  border-radius: 4px;
 }
 
 .sidebar-right ul li a:hover {
   background-color: #33ff33;
   color: #000;
-}
-
-.sidebar-right .tags li {
-  display: inline-block;
-  margin: 0.5rem;
-}
-
-.sidebar-right .tags li a {
-  background-color: #0f0;
-  color: #000;
-  padding: 5px 10px;
-  border-radius: 20px;
-  text-decoration: none;
-  font-size: 0.9rem;
-}
-
-.sidebar-right .tags li a:hover {
-  background-color: #33ff33;
 }
 
 /* Contenido principal */
@@ -145,38 +89,16 @@ body {
   margin-right: 250px; /* Espacio para la barra derecha */
   padding: 2rem;
   box-sizing: border-box;
+  width: calc(100% - 500px); /* Reduce el ancho por el tamaño de ambas barras */
 }
 
-/* Cabecera */
-header {
+/* Pie de página */
+footer {
   text-align: center;
+  padding: 1rem;
+  background: #000; /* Fondo negro */
+  color: #fff; /* Texto blanco */
+  position: relative;
+  width: 100%;
+  margin-top: auto;
 }
-
-header h1 {
-  font-size: 2.5rem;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  margin-bottom: 1rem;
-}
-
-header p {
-  margin-top: 0.5rem;
-  font-size: 1.2rem;
-  color: #33ff33;
-}
-
-/* Posts */
-.posts article {
-  border-bottom: 1px solid #0f0;
-  padding: 1rem 0;
-}
-
-.posts article h2 a {
-  text-decoration: none;
-  color: #0f0;
-}
-
-.posts article h2 a:hover {
-  color: #33ff33;
-}
-
