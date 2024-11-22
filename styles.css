@@ -74,7 +74,7 @@ body {
 
 /* Contenedor principal */
 .content {
-  margin-left: 250px; /* Espacio para la barra lateral */
+  margin-left: 350px; /* Espacio para la barra lateral */
   padding: 2rem;
   flex: 1; /* Ocupa todo el espacio restante */
   display: flex;
