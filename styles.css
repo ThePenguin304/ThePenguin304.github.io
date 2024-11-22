@@ -54,11 +54,17 @@ body {
 }
 
 .sidebar nav ul li a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* Espacio entre el ícono y el texto */
   color: #0f0;
   text-decoration: none;
-  display: block;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem;
   border-radius: 4px;
+}
+
+.sidebar nav ul li a i {
+  font-size: 1.5rem; /* Tamaño del ícono */
 }
 
 .sidebar nav ul li a:hover {
