@@ -109,8 +109,8 @@ header p {
 footer {
   text-align: center;
   padding: 1rem;
-  background: #111;
-  color: #000;
+  background: #000;
+  color: #fff;
   position: relative;
   width: 100%;
   margin-top: auto; /* Empuja el pie de página hacia el fondo */
