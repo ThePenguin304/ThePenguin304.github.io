@@ -3,10 +3,11 @@ body {
   font-family: "Courier New", Courier, monospace;
   margin: 0;
   padding: 0;
-  line-height: 1.6;
   background-color: #000; /* Fondo negro */
   color: #0f0; /* Texto verde tipo hacking */
   display: flex;
+  min-height: 100vh;
+  flex-direction: column;
 }
 
 /* Barra lateral */
@@ -15,10 +16,11 @@ body {
   background-color: #111;
   padding: 2rem;
   position: fixed;
-  height: 100%;
   top: 0;
   left: 0;
+  height: 100%;
   color: #0f0;
+  overflow-y: auto; /* Permite scroll si el contenido es muy largo */
 }
 
 .profile {
@@ -40,10 +42,9 @@ body {
 
 .profile p {
   font-size: 1rem;
-  color: #33ff33; /* Verde brillante para el texto descriptivo */
+  color: #33ff33;
 }
 
-/* Estilos del menú de navegación */
 .sidebar nav ul {
   list-style-type: none;
   padding: 0;
@@ -68,12 +69,11 @@ body {
 
 /* Contenido principal */
 .content {
-  margin-left: 250px; /* Para que el contenido no se solape con la barra lateral */
+  margin-left: 250px; /* Para dejar espacio a la barra lateral */
   padding: 2rem;
-  width: calc(100% - 250px);
+  flex: 1; /* Se expande para ocupar todo el espacio disponible */
 }
 
-/* Estilo del header */
 header {
   text-align: center;
 }
@@ -89,7 +89,6 @@ header p {
   font-size: 1.2rem;
 }
 
-/* Estilo para los posts */
 .posts article {
   border-bottom: 1px solid #0f0;
   padding: 1rem 0;
@@ -107,7 +106,8 @@ header p {
 /* Pie de página */
 footer {
   text-align: center;
-  padding: 1rem 0;
+  padding: 1rem;
   background: #111;
   color: #0f0;
+  margin-left: 250px; /* Alinea el pie de página con el contenido principal */
 }
