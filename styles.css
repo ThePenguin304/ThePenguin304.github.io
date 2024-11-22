@@ -7,21 +7,20 @@ body {
   color: #0f0; /* Texto verde tipo hacking */
   display: flex;
   min-height: 100vh;
-  flex-direction: column; /* Para asegurarnos de que el pie de página esté al final */
 }
 
 /* Barra lateral */
 .sidebar {
-  width: 250px;
-  background-color: #111;
+  width: 300px; /* Ancho de la barra lateral */
+  background-color: #111; /* Fondo oscuro */
   padding: 2rem;
   position: fixed; /* Fija la barra lateral */
   top: 0;
   left: 0;
   height: 100%; /* Ocupar toda la altura de la ventana */
-  color: #0f0;
+  color: #0f0; /* Texto verde */
   overflow-y: auto; /* Scroll si el contenido es muy largo */
-  z-index: 10; /* Asegura que esté por debajo del contenido */
+  z-index: 10; /* Asegura que esté encima del contenido */
 }
 
 .profile {
@@ -70,9 +69,9 @@ body {
 
 /* Contenido principal */
 .content {
-  margin-left: 350px; /* Deja espacio para la barra lateral */
+  margin-left: 300px; /* Igual al ancho de la barra lateral */
   padding: 2rem;
-  width: calc(100% - 250px); /* Ajusta el ancho para ocupar el resto del espacio */
+  width: calc(100% - 300px); /* Resto del espacio disponible */
   box-sizing: border-box;
 }
 
@@ -111,8 +110,8 @@ footer {
   padding: 1rem;
   background: #000; /* Fondo negro */
   color: #fff; /* Texto blanco */
-  position: relative;
   width: 100%;
   margin-top: auto; /* Empuja el pie de página hacia el fondo */
   font-size: 0.9rem; /* Tamaño de texto ajustado */
+  position: relative; /* Para asegurar que no se solape */
 }
