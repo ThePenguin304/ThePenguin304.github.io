@@ -38,8 +38,8 @@ body {
 }
 
 .profile-img {
-  width: 100px; /* Tamaño más pequeño (ajusta según tu preferencia) */
-  height: 100px; /* Mantén las dimensiones iguales para que sea un círculo */
+  width: 150px; /* Tamaño más pequeño (ajusta según tu preferencia) */
+  height: 150px; /* Mantén las dimensiones iguales para que sea un círculo */
   border-radius: 50%; /* Esto crea el efecto circular */
   display: block;
   margin: 0 auto; /* Centra la imagen horizontalmente */
@@ -54,12 +54,12 @@ body {
 
 .profile h2 {
   margin: 10px 0; /* Espaciado superior e inferior para el nombre */
-  font-size: 1.2rem; /* Ajusta el tamaño del texto */
+  font-size: 1.5rem; /* Ajusta el tamaño del texto */
   color: #0f0; /* Mantiene el color verde */
 }
 
 .profile p {
-  font-size: 1rem; /* Ajusta el tamaño del texto para la descripción */
+  font-size: 1.2rem; /* Ajusta el tamaño del texto para la descripción */
   color: #33ff33; /* Color verde más suave */
   margin: 0; /* Elimina márgenes extra */
 }
