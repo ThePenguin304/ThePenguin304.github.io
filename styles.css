@@ -10,34 +10,29 @@ body {
   flex-direction: column; /* Para el pie de página */
 }
 
-/* Barra lateral izquierda */
-.sidebar {
-  width: 250px;
-  background-color: #111;
-  padding: 2rem;
-  position: fixed; /* Fija la barra lateral */
-  top: 0;
-  left: 0;
-  height: 100%; /* Ocupar toda la altura de la ventana */
-  color: #0f0;
-  overflow-y: auto; /* Scroll si el contenido es muy largo */
-  z-index: 10; /* Asegura que esté por encima del contenido */
+/* Opciones del menú en la barra lateral izquierda */
+.sidebar nav ul {
+  list-style-type: none;
+  padding: 0;
 }
 
-.sidebar .profile {
-  text-align: center;
-  margin-bottom: 2rem;
+.sidebar nav ul li {
+  margin: 1rem 0;
 }
 
-.sidebar .profile-img {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  margin-bottom: 1rem;
+.sidebar nav ul li a {
+  color: #0f0; /* Texto verde */
+  text-decoration: none;
+  display: block;
+  padding: 10px;
+  font-size: 1.2rem; /* Tamaño grande */
+  border-radius: 4px;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.sidebar h2, .sidebar p {
-  margin: 0;
+.sidebar nav ul li a:hover {
+  background-color: #33ff33; /* Fondo verde claro */
+  color: #000; /* Texto negro al pasar el mouse */
 }
 
 /* Barra lateral derecha */
