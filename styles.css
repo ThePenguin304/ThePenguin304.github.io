@@ -37,16 +37,17 @@ body {
 
 /* Barra lateral derecha */
 .sidebar-right {
-  width: 250px;
-  background-color: #111; /* Mismo color que la barra izquierda */
+  width: 250px; /* Ancho fijo */
+  background-color: #111; /* Mismo color que la izquierda */
   padding: 2rem;
-  position: fixed;
+  position: fixed; /* Mantener fija en su lugar */
   top: 0;
-  right: 0; /* Fija la barra a la derecha */
-  height: 100%;
+  right: 0;
+  height: 100vh; /* Altura completa */
   color: #0f0;
   overflow-y: auto;
   z-index: 10;
+  box-sizing: border-box;
 }
 
 .sidebar-right > section {
@@ -83,8 +84,8 @@ body {
   margin-left: 250px; /* Espacio para la barra izquierda */
   margin-right: 250px; /* Espacio para la barra derecha */
   padding: 2rem;
-  box-sizing: border-box;
-  width: calc(100% - 500px); /* Reduce el ancho por el tamaño de ambas barras */
+  box-sizing: border-box; /* Incluir padding en el ancho */
+  flex: 1; /* Asegurar que el contenido crezca correctamente */
 }
 
 /* Pie de página */
