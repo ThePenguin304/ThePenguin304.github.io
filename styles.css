@@ -1,113 +1,156 @@
-/* General */
-body {
-  font-family: "Courier New", Courier, monospace;
+/* Reset básico */
+* {
   margin: 0;
   padding: 0;
-  background-color: #000; /* Fondo negro */
-  color: #0f0; /* Texto verde tipo hacking */
-  display: grid; /* Usamos Grid Layout */
-  grid-template-columns: 20% 65% 15%; /* Definimos proporciones de las columnas */
-  grid-template-rows: auto; /* Las filas se ajustan automáticamente */
-  height: 100vh; /* Altura completa de la ventana */
   box-sizing: border-box;
 }
 
-/* Barra lateral izquierda */
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: space-between;
+  min-height: 100vh;
+  background-color: #f4f4f4;
+}
+
 .sidebar {
-  background-color: #111; /* Fondo oscuro */
-  padding: 2rem;
-  overflow-y: auto; /* Scroll si el contenido es largo */
+  width: 15%;
+  background-color: #1a1a1a;
+  color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   height: 100vh;
-  box-sizing: border-box; /* Incluye el padding dentro del ancho */
-}
-
-/* Contenido principal */
-.content {
-  padding: 2rem;
-  box-sizing: border-box; /* Asegura que el padding no altere el ancho */
-  overflow-y: auto;
-}
-
-/* Barra lateral derecha */
-.sidebar-right {
-  background-color: #111; /* Fondo oscuro */
-  padding: 1rem;
-  overflow-y: auto;
-  height: 100vh;
-  box-sizing: border-box;
-}
-
-.profile-img {
-  width: 150px; /* Tamaño más pequeño (ajusta según tu preferencia) */
-  height: 150px; /* Mantén las dimensiones iguales para que sea un círculo */
-  border-radius: 50%; /* Esto crea el efecto circular */
-  display: block;
-  margin: 0 auto; /* Centra la imagen horizontalmente */
-  border: 3px solid #0f0; /* Opcional: Añade un borde verde */
-  box-shadow: 0 0 10px rgba(0, 255, 0, 0.5); /* Opcional: Efecto de sombra */
 }
 
 .profile {
-  text-align: center; /* Centra horizontalmente el contenido */
-  margin-top: 20px; /* Ajusta el espacio superior si lo necesitas */
+  text-align: center;
+  margin-bottom: 20px;
 }
 
-.profile h2 {
-  margin: 10px 0; /* Espaciado superior e inferior para el nombre */
-  font-size: 1.5rem; /* Ajusta el tamaño del texto */
-  color: #0f0; /* Mantiene el color verde */
+.profile-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
 }
 
-.profile p {
-  font-size: 1.2rem; /* Ajusta el tamaño del texto para la descripción */
-  color: #33ff33; /* Color verde más suave */
-  margin: 0; /* Elimina márgenes extra */
+h2 {
+  font-size: 1.5em;
+  margin-bottom: 5px;
 }
 
-/* Navegación dentro de la barra izquierda */
-.sidebar nav ul {
+p {
+  font-size: 1em;
+  color: #aaa;
+}
+
+nav ul {
   list-style-type: none;
   padding: 0;
 }
 
-.sidebar nav ul li {
-  margin: 2rem 0;
+nav ul li {
+  margin: 10px 0;
 }
 
-.sidebar nav ul li a {
-  color: #0f0;
+nav ul li a {
+  color: #fff;
   text-decoration: none;
-  font-size: 1.2rem; /* Tamaño de fuente más grande */
-  padding: 10px;
+  font-size: 1.2em;
   display: block;
-  border-radius: 4px;
+  padding: 5px 0;
+  border-radius: 5px;
+  transition: background-color 0.3s;
 }
 
-.sidebar nav ul li a:hover {
-  background-color: #33ff33;
-  color: #000;
+nav ul li a:hover {
+  background-color: #007bff;
 }
 
-/* Posts en el contenido principal */
-.posts article {
-  border-bottom: 1px solid #0f0;
-  padding: 1rem 0;
+/* Barra lateral derecha */
+.sidebar-right {
+  width: 10%;
+  background-color: #1a1a1a;
+  color: white;
+  padding: 20px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
 }
 
-.posts article h2 a {
+.sidebar-right h2 {
+  font-size: 1.5em;
+  margin-bottom: 15px;
+}
+
+.sidebar-right ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar-right ul li {
+  margin: 10px 0;
+}
+
+.sidebar-right ul li a {
+  color: white;
   text-decoration: none;
-  color: #0f0;
+  font-size: 1.1em;
+  transition: color 0.3s;
 }
 
-.posts article h2 a:hover {
-  color: #33ff33;
+.sidebar-right ul li a:hover {
+  color: #007bff;
 }
 
-/* Pie de página */
+/* Contenido principal */
+.content {
+  flex-grow: 1;
+  margin-left: 15%;
+  margin-right: 10%;
+  padding: 20px;
+}
+
+header h1 {
+  font-size: 2.5em;
+  color: #333;
+}
+
+header p {
+  font-size: 1.2em;
+  color: #555;
+}
+
+.posts article {
+  margin-bottom: 20px;
+}
+
+.posts article h2 {
+  font-size: 1.8em;
+  color: #333;
+}
+
+.posts article p {
+  color: #666;
+}
+
+.posts article a {
+  text-decoration: none;
+  color: #007bff;
+  font-weight: bold;
+}
+
 footer {
   text-align: center;
-  padding: 1rem;
-  background: #000;
-  color: #fff;
-  grid-column: span 3; /* Ocupa las tres columnas del grid */
+  padding: 10px;
+  background-color: #333;
+  color: white;
+}
+
+footer p {
+  margin: 0;
 }
