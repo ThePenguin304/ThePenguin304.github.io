@@ -5,12 +5,39 @@ body {
   padding: 0;
   background-color: #000; /* Fondo negro */
   color: #0f0; /* Texto verde tipo hacking */
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column; /* Para el pie de página */
+  display: grid; /* Usamos Grid Layout */
+  grid-template-columns: 20% 60% 20%; /* Definimos proporciones de las columnas */
+  grid-template-rows: auto; /* Las filas se ajustan automáticamente */
+  height: 100vh; /* Altura completa de la ventana */
+  box-sizing: border-box;
 }
 
-/* Opciones del menú en la barra lateral izquierda */
+/* Barra lateral izquierda */
+.sidebar {
+  background-color: #111; /* Fondo oscuro */
+  padding: 2rem;
+  overflow-y: auto; /* Scroll si el contenido es largo */
+  height: 100vh;
+  box-sizing: border-box; /* Incluye el padding dentro del ancho */
+}
+
+/* Contenido principal */
+.content {
+  padding: 2rem;
+  box-sizing: border-box; /* Asegura que el padding no altere el ancho */
+  overflow-y: auto;
+}
+
+/* Barra lateral derecha */
+.sidebar-right {
+  background-color: #111; /* Fondo oscuro */
+  padding: 2rem;
+  overflow-y: auto;
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+/* Navegación dentro de la barra izquierda */
 .sidebar nav ul {
   list-style-type: none;
   padding: 0;
@@ -21,80 +48,40 @@ body {
 }
 
 .sidebar nav ul li a {
-  color: #0f0; /* Texto verde */
+  color: #0f0;
   text-decoration: none;
-  display: block;
+  font-size: 1.2rem; /* Tamaño de fuente más grande */
   padding: 10px;
-  font-size: 1.2rem; /* Tamaño grande */
+  display: block;
   border-radius: 4px;
-  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .sidebar nav ul li a:hover {
-  background-color: #33ff33; /* Fondo verde claro */
-  color: #000; /* Texto negro al pasar el mouse */
-}
-
-/* Barra lateral derecha */
-.sidebar-right {
-  width: 250px; /* Ancho fijo */
-  background-color: #111; /* Mismo color que la izquierda */
-  padding: 2rem;
-  position: fixed; /* Mantener fija en su lugar */
-  top: 0;
-  right: 0;
-  height: 100vh; /* Altura completa */
-  color: #0f0;
-  overflow-y: auto;
-  z-index: 10;
-  box-sizing: border-box;
-}
-
-.sidebar-right > section {
-  margin-top: 3.5rem; /* Ajusta según la altura de la cabecera */
-}
-
-.sidebar-right h3 {
-  border-bottom: 2px solid #33ff33;
-  padding-bottom: 0.5rem;
-  margin-bottom: 1rem;
-}
-
-.sidebar-right ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-.sidebar-right ul li {
-  margin: 1rem 0;
-}
-
-.sidebar-right ul li a {
-  color: #0f0;
-  text-decoration: none;
-}
-
-.sidebar-right ul li a:hover {
   background-color: #33ff33;
   color: #000;
 }
 
-/* Contenido principal */
-.content {
-  margin-left: 250px; /* Espacio para la barra izquierda */
-  margin-right: 250px; /* Espacio para la barra derecha */
-  padding: 2rem;
-  box-sizing: border-box; /* Incluir padding en el ancho */
-  flex: 1; /* Asegurar que el contenido crezca correctamente */
+/* Posts en el contenido principal */
+.posts article {
+  border-bottom: 1px solid #0f0;
+  padding: 1rem 0;
+}
+
+.posts article h2 a {
+  text-decoration: none;
+  color: #0f0;
+}
+
+.posts article h2 a:hover {
+  color: #33ff33;
 }
 
 /* Pie de página */
 footer {
   text-align: center;
   padding: 1rem;
-  background: #000; /* Fondo negro */
-  color: #fff; /* Texto blanco */
-  position: relative;
-  width: 100%;
-  margin-top: auto;
+  background: #000;
+  color: #fff;
+  grid-column: span 3; /* Ocupa las tres columnas del grid */
 }
+
