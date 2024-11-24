@@ -31,7 +31,7 @@ body {
 /* Barra lateral derecha */
 .sidebar-right {
   background-color: #111; /* Fondo oscuro */
-  padding: 2rem;
+  padding: 1rem;
   overflow-y: auto;
   height: 100vh;
   box-sizing: border-box;
