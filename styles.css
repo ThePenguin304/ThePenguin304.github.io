@@ -64,7 +64,7 @@ body {
 /* Ajustes para los iconos */
 .sidebar .social-icons {
   position: absolute; /* Fijamos la posición de los iconos */
-  bottom: 20px; /* Alineamos los iconos al fondo de la barra lateral */
+  bottom: 130px; /* Alineamos los iconos al fondo de la barra lateral */
   left: 50%; /* Centra los iconos en el contenedor */
   transform: translateX(-50%); /* Asegura que el centro sea exacto */
   width: auto; /* No es necesario usar 100%, ya que vamos a centrar los iconos */
