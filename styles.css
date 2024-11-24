@@ -67,9 +67,8 @@ body {
   position: absolute; /* Fijamos la posición de los iconos */
   bottom: 130px; /* Alineamos los iconos al fondo de la barra lateral */
   width: 100%; /* Aseguramos que ocupen todo el ancho de la barra */
-  text-align: center; /* Alineamos los iconos a la izquierda */
-  padding-left: 0px; /* Añadimos un pequeño margen izquierdo para que no toquen el borde */
-  padding-right: 30px;
+  text-align: center; /* Alineamos los iconos a la izquierda */ 
+  margin-right: 10px;
 }
 
 .sidebar .social-icons a {
