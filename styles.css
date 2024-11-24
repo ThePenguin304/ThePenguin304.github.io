@@ -37,6 +37,16 @@ body {
   box-sizing: border-box;
 }
 
+.profile-img {
+  width: 100px; /* Tamaño más pequeño (ajusta según tu preferencia) */
+  height: 100px; /* Mantén las dimensiones iguales para que sea un círculo */
+  border-radius: 50%; /* Esto crea el efecto circular */
+  display: block;
+  margin: 0 auto; /* Centra la imagen horizontalmente */
+  border: 3px solid #0f0; /* Opcional: Añade un borde verde */
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.5); /* Opcional: Efecto de sombra */
+}
+
 /* Navegación dentro de la barra izquierda */
 .sidebar nav ul {
   list-style-type: none;
