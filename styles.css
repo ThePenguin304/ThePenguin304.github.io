@@ -6,7 +6,7 @@ body {
   background-color: #000; /* Fondo negro */
   color: #0f0; /* Texto verde tipo hacking */
   display: grid; /* Usamos Grid Layout */
-  grid-template-columns: 20% 70% 10%; /* Definimos proporciones de las columnas */
+  grid-template-columns: 20% 65% 15%; /* Definimos proporciones de las columnas */
   grid-template-rows: auto; /* Las filas se ajustan automáticamente */
   height: 100vh; /* Altura completa de la ventana */
   box-sizing: border-box;
