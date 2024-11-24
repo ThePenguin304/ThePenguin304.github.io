@@ -63,12 +63,16 @@ body {
 
 /* Ajustes para los iconos */
 .sidebar .social-icons {
-  margin-top: auto; /* Empuja los iconos hacia el final de la barra lateral */
-  text-align: center; /* Centra los iconos */
+  margin-top: 30px; /* Añadimos un margen para separarlos del contenido superior */
+  position: absolute; /* Fijamos la posición de los iconos */
+  bottom: 20px; /* Alineamos los iconos al fondo de la barra lateral */
+  width: 100%; /* Aseguramos que ocupen todo el ancho de la barra */
+  text-align: left; /* Alineamos los iconos a la izquierda */
+  padding-left: 20px; /* Añadimos un pequeño margen izquierdo para que no toquen el borde */
 }
 
 .sidebar .social-icons a {
-  font-size: 1.5em;
+  font-size: 2.5em;
   margin: 10px 0;
   color: white;
   transition: color 0.3s;
@@ -80,7 +84,7 @@ body {
 
 /* Contenido principal */
 .content {
-  margin-left: 15%;
+  margin-left: 20%;
   margin-right: 10%;
   padding: 20px;
   flex-grow: 1;
