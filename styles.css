@@ -47,6 +47,23 @@ body {
   box-shadow: 0 0 10px rgba(0, 255, 0, 0.5); /* Opcional: Efecto de sombra */
 }
 
+.profile {
+  text-align: center; /* Centra horizontalmente el contenido */
+  margin-top: 20px; /* Ajusta el espacio superior si lo necesitas */
+}
+
+.profile h2 {
+  margin: 10px 0; /* Espaciado superior e inferior para el nombre */
+  font-size: 1.2rem; /* Ajusta el tamaño del texto */
+  color: #0f0; /* Mantiene el color verde */
+}
+
+.profile p {
+  font-size: 1rem; /* Ajusta el tamaño del texto para la descripción */
+  color: #33ff33; /* Color verde más suave */
+  margin: 0; /* Elimina márgenes extra */
+}
+
 /* Navegación dentro de la barra izquierda */
 .sidebar nav ul {
   list-style-type: none;
