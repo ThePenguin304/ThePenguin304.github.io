@@ -5,6 +5,9 @@ body {
   color: white;
   margin: 0;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 /* Barra lateral izquierda */
@@ -58,6 +61,7 @@ body {
   margin-left: 15%;
   margin-right: 10%;
   padding: 20px;
+  flex-grow: 1;
 }
 
 .content header {
@@ -136,4 +140,5 @@ footer {
   padding: 20px;
   background-color: #1f1f1f;
   color: white;
+  margin-top: auto;
 }
